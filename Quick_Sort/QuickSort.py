@@ -43,17 +43,33 @@ def sortArrayByQuickSort(unsortedArray):
     """
     def partition(unsortedArray):
         # Find a pivot
-        pivot = int(len(unsortedArray))/2
-        quickSort(unsortedArray, unsortedArray[0], len(unsortedArray)-1, pivot)
+        pivot = int(len(unsortedArray)/2)
+        # Loop to access each index of array, increase first and last after each number is sorted
+        for i in range(len(unsortedArray)):
+            quickSort(unsortedArray, i, len(unsortedArray)-i-1, pivot)
+
+
     def quickSort(array, first, last, pivot):
-        # Compare first and last
+        # Find first >= pivot and last <= pivot
+        # Compare first and last (base case)
         if first > last:
             return
-        # Compare value of first and last
-        if array[first] >= pivot >= array[last]:
-            swapValue(array, first, last)
+        print(f"Current first: {array[first]} of index [{first}]")
+        print(f"Current last: {array[last]} of index [{last}]")
+        displayArray(array, "The array:")
+        print()
+        # Compare value of first and pivot
+        if array[first] < array[pivot]:
             quickSort(array, first+1, last, pivot)
+        # Compare value of last and pivot
+        elif array[last] > array[pivot]:
             quickSort(array, first, last-1, pivot)
+        else:
+            print(f"{array[first]} swap with {array[last]}, the pivot is {array[pivot]}")
+            print("---------------------")
+            print()
+            swapValue(array, first, last)
+        print()
 
 
 
